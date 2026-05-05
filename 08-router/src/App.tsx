@@ -7,7 +7,6 @@ export const App = () => {
     <Routes>
       <Route path="/" element={<HomeView />} />
       <Route element={<MainLayout />}>
-        <Route path="/now-playing" element={<NowPlayingView />} />
         <Route path="/trending" element={<TrendingView />} />
         <Route path="/search" element={<SearchView />} />
         <Route path="/movie/:id" element={<MovieView />}>
