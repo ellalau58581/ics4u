@@ -16,12 +16,11 @@ export const NowPlayingView = () => {
   }));
 
   if (!data) {
-    return <p className="text-center text-gray-400">Loading...</p>;
+    return <p className="text-center text-gray-400">HII...</p>;
   }
-
   return (
     <section className="mx-auto max-w-7xl space-y-5 p-5">
-      <h1 className="mb-4 text-3xl font-bold">Now Playing</h1>
+      <h1 className="mb-4 text-3xl font-bold">NOOOOO</h1>
       <ImageGrid images={gridData} onClick={(image) => navigate(`/movie/${image.id}/credits`)} />
       <Pagination page={page} maxPages={data.total_pages} onClick={setPage} />
     </section>
