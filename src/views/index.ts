@@ -6,3 +6,4 @@ export * from '@/views/MovieView';
 export * from '@/views/ReviewsView';
 export * from '@/views/SearchView';
 export * from '@/views/TrendingView';
+export * from './Genre/GenreView';

@@ -8,3 +8,7 @@ export * from '@/components/controls/SearchBar';
 export * from '@/components/site/DetailItem';
 export * from '@/components/site/Header';
 export * from '@/components/site/Modal';
+export * from './controls/links/Link';
+export * from './controls/Pagination';
+export * from './controls/SearchBar';
+export * from './controls/TVSubheader';

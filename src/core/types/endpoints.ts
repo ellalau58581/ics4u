@@ -42,7 +42,9 @@ export type ReviewsResponse = {
 export type MediaResponse = {
   results: Array<{
     id: number;
-    original_title: string;
+    original_title?: string;
+    name?: string;
+    title?: string;
     poster_path: string;
   }>;
   total_pages: number;

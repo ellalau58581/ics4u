@@ -1,7 +1,11 @@
+export const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 export const MOVIE_ENDPOINT = 'https://api.themoviedb.org/3/movie';
+export const TV_ENDPOINT = 'https://api.themoviedb.org/3/tv';
 export const NOW_PLAYING_ENDPOINT = 'https://api.themoviedb.org/3/movie/now_playing';
 export const TOP_RATED_ENDPOINT = 'https://api.themoviedb.org/3/movie/top_rated';
 export const POPULAR_ENDPOINT = 'https://api.themoviedb.org/3/movie/popular';
 export const UPCOMING_ENDPOINT = 'https://api.themoviedb.org/3/movie/upcoming';
 export const TRENDING_ENDPOINT = 'https://api.themoviedb.org/3/trending/movie';
 export const SEARCH_ENDPOINT = 'https://api.themoviedb.org/3/search/movie';
+export const DISCOVER_MOVIE_ENDPOINT = 'https://api.themoviedb.org/3/discover/movie';
+export const DISCOVER_TV_ENDPOINT = 'https://api.themoviedb.org/3/discover/tv';

@@ -7,3 +7,9 @@ export type ImageCell = {
   secondaryText?: string;
   media?: Media;
 };
+export type GridData = {
+  id: number;
+  imagePath: string | null;
+  primaryText: string;
+  secondaryText?: string;
+};

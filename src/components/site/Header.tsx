@@ -9,7 +9,8 @@ export const Header = () => {
           <LinkGroup
             options={[
               { label: 'Movies', to: '/movies' },
-              { label: 'Now Playing', to: '/now-playing' },
+              { label: 'TV', to: '/tv' },
+              { label: 'Genre', to: '/genre/movies/action' },
               { label: 'Trending', to: '/trending?interval=day' },
               { label: 'Search', to: '/search' },
             ]}
