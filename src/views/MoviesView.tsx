@@ -10,25 +10,21 @@ const categories = [
     id: 'now-playing',
     label: 'Now Playing',
     endpoint: NOW_PLAYING_ENDPOINT,
-    description: 'Fresh theatrical releases and the latest cinema favorites.',
   },
   {
     id: 'popular',
     label: 'Popular',
     endpoint: POPULAR_ENDPOINT,
-    description: 'The most-watched movies lighting up the global box office.',
   },
   {
     id: 'upcoming',
     label: 'Upcoming',
     endpoint: UPCOMING_ENDPOINT,
-    description: 'Eye-catching premieres and next-season blockbusters.',
   },
   {
     id: 'top-rated',
     label: 'Top Rated',
     endpoint: TOP_RATED_ENDPOINT,
-    description: 'Critically acclaimed favorites with audience-led praise.',
   },
 ] as const;
 
@@ -36,7 +32,6 @@ type Category = (typeof categories)[number];
 
 export const MoviesView = () => {
   const [activeCategory, setActiveCategory] = useState<Category>(categories[0]);
-  //   const [dropdownOpen, setDropdownOpen] = useState(false);
   const { data } = useTmdb<MediaResponse>(activeCategory.endpoint, { page: 1 });
   const movies = useMemo(() => data?.results ?? [], [data]);
   const featuredMovie = movies[0];
@@ -45,7 +40,7 @@ export const MoviesView = () => {
       movies.map((movie) => ({
         id: movie.id,
         imageUrl: getImageUrl(movie.poster_path),
-        primaryText: movie.original_title,
+        primaryText: movie.original_title ?? 'Untitled',
         secondaryText: activeCategory.label,
       })),
     [movies, activeCategory.label]
@@ -135,7 +130,6 @@ export const MoviesView = () => {
                   {movies.length} titles
                 </span>
               </div>
-              <p className="text-slate-300">{activeCategory.description}</p>
             </div>
           </section>
 

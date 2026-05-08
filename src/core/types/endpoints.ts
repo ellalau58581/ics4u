@@ -1,4 +1,4 @@
-export type MovieRespsonse = {
+export type MovieResponse = {
   id: number;
   title: string;
   overview: string;
@@ -48,4 +48,36 @@ export type MediaResponse = {
     poster_path: string;
   }>;
   total_pages: number;
+};
+
+export type TvResponse = {
+  results: Array<{
+    id: number;
+    name: string;
+    poster_path: string;
+  }>;
+  total_pages: number;
+};
+
+export type PersonResponse = {
+  results: Array<{
+    id: number;
+    name: string;
+    profile_path: string;
+    known_for_department: string;
+  }>;
+  total_pages: number;
+};
+
+export type SearchResponse = {
+  results: Array<{
+    id: number;
+    name?: string;
+    original_title?: string;
+    original_name?: string;
+    poster_path?: string;
+    profile_path?: string;
+  }>;
+  total_pages: number;
+  total_results: number;
 };

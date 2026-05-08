@@ -1,9 +1,11 @@
 import { API_KEY } from '@/core';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 export function useTmdb<T>(url: string, params: Record<string, unknown>) {
   const [data, setData] = useState<T | null>(null);
+
+  const paramsString = useMemo(() => JSON.stringify(params), [params]);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -29,7 +31,7 @@ export function useTmdb<T>(url: string, params: Record<string, unknown>) {
     fetchData();
 
     return () => controller.abort();
-  }, [url, JSON.stringify(params)]); 
+  }, [url, paramsString]);
 
   return { data };
 }

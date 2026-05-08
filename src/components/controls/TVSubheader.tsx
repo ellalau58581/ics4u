@@ -1,13 +1,25 @@
-import { Link } from '@/components';
+type TVSubheaderProps = {
+  value: string;
+  options: Array<{ label: string; endpoint: string }>;
+  onClick: (endpoint: string) => void;
+};
 
-export const TVSubheader = () => {
+export const TVSubheader = ({ value, options, onClick }: TVSubheaderProps) => {
   return (
     <header>
-      <nav className="flex gap-4 bg-gray-600 p-4">
-        <Link to="/tv/airing-today">Airing Today</Link>
-        <Link to="/tv/on-the-air">On The Air</Link>
-        <Link to="/tv/popular">Popular</Link>
-        <Link to="/tv/top-rated">Top Rated</Link>
+      <nav className="flex flex-wrap gap-3 bg-gray-600 p-4">
+        {options.map((option) => (
+          <button
+            key={option.endpoint}
+            type="button"
+            onClick={() => onClick(option.endpoint)}
+            className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
+              value === option.endpoint ? 'bg-white text-gray-900' : 'bg-gray-700 text-white hover:bg-gray-600'
+            }`}
+          >
+            {option.label}
+          </button>
+        ))}
       </nav>
     </header>
   );

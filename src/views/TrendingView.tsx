@@ -1,5 +1,5 @@
 import { ButtonGroup, ImageGrid, Pagination } from '@/components';
-import { getImageUrl, type ImageCell, type MovieRespsonse, TRENDING_ENDPOINT } from '@/core';
+import { getImageUrl, type ImageCell, type MovieResponse, TRENDING_ENDPOINT } from '@/core';
 import { useTmdb } from '@/hooks';
 import { useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
@@ -9,7 +9,7 @@ export const TrendingView = () => {
   const [page, setPage] = useState<number>(1);
   const [searchParams, setSearchParams] = useSearchParams();
   const interval = searchParams.get('interval') || 'day';
-  const { data } = useTmdb<MovieRespsonse>(`${TRENDING_ENDPOINT}/${interval}`, { page, time_window: interval });
+  const { data } = useTmdb<MovieResponse>(`${TRENDING_ENDPOINT}/${interval}`, { page, time_window: interval });
 
   const gridData: ImageCell[] = (data?.results ?? []).map((result) => ({
     id: result.id,
