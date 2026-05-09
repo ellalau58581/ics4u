@@ -25,7 +25,10 @@ export const tvGenres = [
   { value: 'sci-fi', name: 'Science Fiction' },
 ];
 
-export const GENRE_MAP = {
+export const GENRE_MAP: {
+  movies: Record<string, number>;
+  tv: Record<string, number>;
+} = {
   movies: {
     action: 28,
     adventure: 12,
@@ -39,6 +42,7 @@ export const GENRE_MAP = {
     romance: 10749,
     'sci-fi': 878,
   },
+
   tv: {
     action: 10759,
     animation: 16,

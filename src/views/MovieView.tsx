@@ -23,7 +23,12 @@ export const MovieView = () => {
         <img className="h-50 w-full rounded-2xl object-cover" src={getBackdropUrl(data.backdrop_path)} alt={data.title} />
         <div className="grid min-h-0 grid-cols-[auto_1fr] gap-5 p-5">
           <img className="w-50 rounded-xl object-cover" src={getImageUrl(data.poster_path)} alt={data.title} />
-          <div className="space-y-4 overflow-y-auto">
+            <div className="space-y-4 overflow-y-auto">
+               <button
+                onClick={() => navigate(-1)}
+                 className="rounded-full border border-slate-600 bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800" >
+                  ← Back
+                  </button>
             <h1 className="text-3xl font-bold">{data.title}</h1>
             <p className="leading-relaxed text-gray-300">{data.overview}</p>
             <div className="grid grid-cols-2 gap-4 pt-2">

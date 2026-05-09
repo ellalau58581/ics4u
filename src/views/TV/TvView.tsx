@@ -1,59 +1,111 @@
-import { ImageGrid } from '@/components/controls/images/ImageGrid';
-import { Pagination } from '@/components/controls/Pagination';
-import { TVSubheader } from '@/components/controls/TVSubheader';
-import type { ImageCell, TvResponse } from '@/core';
-import { getImageUrl } from '@/core';
+import { DetailItem, LinkGroup, Modal } from '@/components';
+import {getBackdropUrl,getImageUrl, TV_ENDPOINT,type TvShowResponse} from '@/core';
 import { useTmdb } from '@/hooks/useTmdb';
-import { useMemo, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate, useParams } from 'react-router-dom';
 
-import { AIRINGTODAY_ENDPOINT, DISCOVER_TV_ENDPOINT, ONTHEAIR_ENDPOINT, TOPRATED_ENDPOINT } from '@/core/constants/endpoints';
-
-const tvTabs = [
-  { label: 'Discover', endpoint: DISCOVER_TV_ENDPOINT },
-  { label: 'Airing Today', endpoint: AIRINGTODAY_ENDPOINT },
-  { label: 'On The Air', endpoint: ONTHEAIR_ENDPOINT },
-  { label: 'Top Rated', endpoint: TOPRATED_ENDPOINT },
-];
-
-export const TVView = () => {
+export const TvView = () => {
   const navigate = useNavigate();
-
-  const [page, setPage] = useState(1);
-  const [activeTab, setActiveTab] = useState(tvTabs[0]);
-
-  const { data } = useTmdb<TvResponse>(activeTab.endpoint, { page });
-
-  const gridData = useMemo<ImageCell[]>(
-    () =>
-      (data?.results ?? []).map((item) => ({
-        id: item.id,
-        imageUrl: getImageUrl(item.poster_path),
-        primaryText: item.name,
-        secondaryText: activeTab.label,
-      })),
-    [data, activeTab.label]
+  const { id } = useParams();
+  const { data } = useTmdb<TvShowResponse>(
+    `${TV_ENDPOINT}/${id}`,
+    {
+      append_to_response: 'videos',
+    }
   );
 
-  const handleTabChange = (endpoint: string) => {
-    const selected = tvTabs.find((t) => t.endpoint === endpoint);
-    if (!selected) return;
-
-    setPage(1);
-    setActiveTab(selected);
-  };
+  const trailerVideo =
+    data?.videos?.results.find(
+      (video) =>
+        video.site === 'YouTube' &&
+        video.type === 'Trailer'
+    );
 
   if (!data) {
-    return <p className="text-center text-gray-400">Loading...</p>;
+    return (
+      <p className="text-center text-gray-400">
+        Loading...
+      </p>
+    );
   }
 
   return (
-    <section className="space-y-6 p-5">
-      <TVSubheader value={activeTab.endpoint} options={tvTabs} onClick={(endpoint) => handleTabChange(endpoint)} />
+    <Modal onClick={() => navigate(-1)}>
+      <div className="grid h-full grid-rows-[auto_1fr]">
+        <img
+          className="h-50 w-full rounded-2xl object-cover"
+          src={getBackdropUrl(data.backdrop_path)}
+          alt={data.name}
+        />
 
-      <ImageGrid images={gridData} onClick={(item) => navigate(`/tv/${item.id}`)} />
+        <div className="grid min-h-0 grid-cols-[auto_1fr] gap-5 p-5">
+          <img
+            className="w-50 rounded-xl object-cover"
+            src={getImageUrl(data.poster_path)}
+            alt={data.name}
+          />
 
-      <Pagination page={page} maxPages={data.total_pages} onClick={setPage} />
-    </section>
+          <div className="space-y-4 overflow-y-auto">
+            <button
+              onClick={() => navigate(-1)}
+              className="rounded-full border border-slate-600 bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800"
+            >
+              ← Back
+            </button>
+
+            <h1 className="text-3xl font-bold">
+              {data.name}
+            </h1>
+
+            <p className="leading-relaxed text-gray-300">
+              {data.overview}
+            </p>
+
+            <div className="grid grid-cols-2 gap-4 pt-2">
+              <DetailItem
+                label="First Air Date"
+                value={data.first_air_date}
+              />
+
+              <DetailItem
+                label="Rating"
+                value={data.vote_average}
+              />
+            </div>
+
+            {trailerVideo && (
+              <div className="aspect-video w-[50%]">
+                <iframe
+                  className="h-full w-full rounded-xl"
+                  src={`https://www.youtube.com/embed/${trailerVideo.key}`}
+                  title={trailerVideo.name}
+                  allowFullScreen
+                />
+              </div>
+            )}
+
+            <LinkGroup
+              options={[
+                {
+                  label: 'Seasons',
+                  to: 'seasons',
+                },
+
+                {
+                  label: 'Credits',
+                  to: 'credits',
+                },
+
+                {
+                  label: 'Reviews',
+                  to: 'reviews',
+                },
+              ]}
+            />
+
+            <Outlet />
+          </div>
+        </div>
+      </div>
+    </Modal>
   );
 };

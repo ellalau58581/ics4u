@@ -1,15 +1,5 @@
 import { ImageGrid, Pagination } from '@/components';
-import {
-  type ImageCell,
-  type MovieResponse,
-  type PersonResponse,
-  type TvResponse,
-  getImageUrl,
-  RATE_LIMIT_DELAY,
-  SEARCH_MOVIE_ENDPOINT,
-  SEARCH_PERSON_ENDPOINT,
-  SEARCH_TV_ENDPOINT,
-} from '@/core';
+import { type ImageCell, type MovieResponse, type PersonResponse, type TvResponse,getImageUrl, RATE_LIMIT_DELAY, SEARCH_MOVIE_ENDPOINT, SEARCH_PERSON_ENDPOINT, SEARCH_TV_ENDPOINT,} from '@/core';
 import { useDebounce, useTmdb } from '@/hooks';
 import { useMemo, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
@@ -20,7 +10,6 @@ export const SearchView = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [page, setPage] = useState<number>(1);
-
   const query = searchParams.get('q') || '';
   const searchType = (searchParams.get('type') as SearchType) || 'movie';
   const debouncedQuery = useDebounce(query, RATE_LIMIT_DELAY);

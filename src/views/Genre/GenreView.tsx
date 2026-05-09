@@ -16,10 +16,12 @@ export const GenreView = () => {
 
   const genreOptions = isMovies ? movieGenres : tvGenres;
 
-  const currentGenreId = isMovies
-    ? GENRE_MAP.movies[genre as keyof typeof GENRE_MAP.movies]
-    : GENRE_MAP.tv[genre as keyof typeof GENRE_MAP.tv];
-
+  let currentGenreId;
+  if (isMovies) {
+    currentGenreId = GENRE_MAP.movies[genre!];
+  } else {
+    currentGenreId = GENRE_MAP.tv[genre!];
+  }
   console.log(media, genre, currentGenreId);
 
   const { data } = useTmdb<MediaResponse>(isMovies ? DISCOVER_MOVIE_ENDPOINT : DISCOVER_TV_ENDPOINT, {

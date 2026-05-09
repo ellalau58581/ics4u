@@ -50,6 +50,24 @@ export type MediaResponse = {
   total_pages: number;
 };
 
+export type TvShowResponse = {
+  id: number;
+  name: string;
+  overview: string;
+  poster_path: string;
+  backdrop_path: string;
+  first_air_date: string;
+  vote_average: number;
+  videos?: {
+    results: Array<{
+      key: string;
+      name: string;
+      site: string;
+      type: string;
+    }>;
+  };
+};
+
 export type TvResponse = {
   results: Array<{
     id: number;
