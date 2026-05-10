@@ -1,5 +1,15 @@
 import { ImageGrid, Pagination } from '@/components';
-import { type ImageCell, type MovieResponse, type PersonResponse, type TvResponse,getImageUrl, RATE_LIMIT_DELAY, SEARCH_MOVIE_ENDPOINT, SEARCH_PERSON_ENDPOINT, SEARCH_TV_ENDPOINT,} from '@/core';
+import {
+  type ImageCell,
+  type MovieResponse,
+  type PersonResponse,
+  type TvResponse,
+  getImageUrl,
+  RATE_LIMIT_DELAY,
+  SEARCH_MOVIE_ENDPOINT,
+  SEARCH_PERSON_ENDPOINT,
+  SEARCH_TV_ENDPOINT,
+} from '@/core';
 import { useDebounce, useTmdb } from '@/hooks';
 import { useMemo, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';

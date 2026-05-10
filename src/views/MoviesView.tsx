@@ -4,7 +4,7 @@ import { NOW_PLAYING_ENDPOINT, POPULAR_ENDPOINT, TOP_RATED_ENDPOINT, UPCOMING_EN
 import type { MediaResponse } from '@/core/types/endpoints';
 import { useTmdb } from '@/hooks/useTmdb';
 import { useMemo, useState } from 'react';
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
 
 const categories = [
   {
@@ -86,9 +86,7 @@ export const MoviesView = () => {
             <h1 className="text-4xl font-bold">{activeCategory.label}</h1>
           </div>
 
-          <ImageGrid
-          images={images}
-          onClick={(image) => navigate(`/movie/${image.id}`)}/>
+          <ImageGrid images={images} onClick={(image) => navigate(`/movie/${image.id}`)} />
         </div>
       </div>
     </div>

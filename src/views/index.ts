@@ -7,5 +7,7 @@ export * from '@/views/ReviewsView';
 export * from '@/views/SearchView';
 export * from '@/views/TrendingView';
 export * from './Genre/GenreView';
+export * from './TV/EpisodeView';
 export * from './TV/SeasonsView';
+export * from './TV/TvDetailView';
 export * from './TV/TvView';

@@ -1,5 +1,19 @@
 import { MainLayout } from '@/layouts';
-import { CreditsView, ErrorView, GenreView, TvView, SeasonsView, HomeView, MovieView, MoviesView, ReviewsView, SearchView, TrendingView } from '@/views';
+import {
+  CreditsView,
+  EpisodeView,
+  ErrorView,
+  GenreView,
+  HomeView,
+  MovieView,
+  MoviesView,
+  ReviewsView,
+  SearchView,
+  SeasonsView,
+  TrendingView,
+  TvDetailView,
+  TvView,
+} from '@/views';
 import { Route, Routes } from 'react-router-dom';
 
 export const App = () => {
@@ -12,14 +26,13 @@ export const App = () => {
         <Route path="/search" element={<SearchView />} />
         <Route path="/movies" element={<MoviesView />} />
         <Route path="/tv" element={<TvView />} />
-        <Route path="tv/:id" element={<TvView />}>
-        <Route path="seasons" element={<SeasonsView />} />
-         <Route path="credits" element={<CreditsView />} />
-  <Route path="reviews" element={<ReviewsView />} />
-</Route>
+        <Route path="tv/:id" element={<TvDetailView />}>
+          <Route path="seasons" element={<SeasonsView />} />
+          <Route path="season/:seasonNumber" element={<EpisodeView />} />
+          <Route path="credits" element={<CreditsView />} />
+          <Route path="reviews" element={<ReviewsView />} />
+        </Route>
         <Route path="/movie/:id" element={<MovieView />}>
-          {' '}
-          //dynamicroute for id, id changes/ambiguous
           <Route path="credits" element={<CreditsView />} />
           <Route path="reviews" element={<ReviewsView />} />
         </Route>
