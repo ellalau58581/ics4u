@@ -31,12 +31,9 @@ type Tab = (typeof tvTabs)[number];
 
 export const TvView = () => {
   const navigate = useNavigate();
-
   const [activeTab, setActiveTab] = useState<Tab>(tvTabs[0]);
   const [page, setPage] = useState<number>(1);
-
   const { data } = useTmdb<MediaResponse>(activeTab.endpoint, { page });
-
   const gridData = useMemo(
     () =>
       (data?.results ?? []).map((result) => ({
@@ -56,7 +53,7 @@ export const TvView = () => {
     <div>
       <Outlet />
 
-      <section className="mx-auto max-w-[1200px] space-y-6 p-5">
+      <section className="mx-auto max-w-300 space-y-6 p-5">
         <div className="flex flex-wrap gap-3">
           {tvTabs.map((tab) => {
             const isActive = activeTab.id === tab.id;

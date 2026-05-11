@@ -22,6 +22,12 @@ export type MovieResponse = {
   total_pages: number;
 };
 
+export type ImagesResponse = {
+  profiles: Array<{
+    file_path: string;
+  }>;
+};
+
 export type CreditsResponse = {
   cast: Array<{
     id: number;
@@ -81,10 +87,23 @@ export type PersonResponse = {
   results: Array<{
     id: number;
     name: string;
+    biography: string;
+    birthday: string;
+    place_of_birth: string;
     profile_path: string;
     known_for_department: string;
   }>;
   total_pages: number;
+};
+
+export type PersonDetailResponse = {
+  id: number;
+  name: string;
+  biography: string;
+  birthday: string;
+  place_of_birth: string;
+  profile_path: string;
+  known_for_department: string;
 };
 
 export type SearchResponse = {

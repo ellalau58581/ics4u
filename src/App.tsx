@@ -1,12 +1,15 @@
 import { MainLayout } from '@/layouts';
 import {
+  CareerView,
   CreditsView,
   EpisodeView,
   ErrorView,
   GenreView,
   HomeView,
+  ImagesView,
   MovieView,
   MoviesView,
+  PersonView,
   ReviewsView,
   SearchView,
   SeasonsView,
@@ -35,6 +38,10 @@ export const App = () => {
         <Route path="/movie/:id" element={<MovieView />}>
           <Route path="credits" element={<CreditsView />} />
           <Route path="reviews" element={<ReviewsView />} />
+        </Route>
+        <Route path="/person/:id" element={<PersonView />}>
+          <Route path="career" element={<CareerView />} />
+          <Route path="images" element={<ImagesView />} />
         </Route>
         <Route path="/genre/:media/:genre" element={<GenreView />} />
       </Route>

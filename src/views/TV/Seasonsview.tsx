@@ -1,3 +1,4 @@
+import { getImageUrl } from '@/core';
 import { useTmdb } from '@/hooks/useTmdb';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -23,17 +24,19 @@ export const SeasonsView = () => {
   return (
     <div className="space-y-4 pt-4">
       <h2 className="text-2xl font-bold text-white">Seasons</h2>
-
-      <div className="grid gap-4">
+      <div className="grid grid-cols-2 gap-5 md:grid-cols-3 lg:grid-cols-4">
         {data.seasons.map((season) => (
           <button
             key={season.id}
             onClick={() => navigate(`/tv/${id}/season/${season.season_number}`)}
-            className="rounded-xl border border-slate-700 bg-slate-900 p-4 text-left transition hover:bg-slate-800"
+            className="overflow-hidden rounded-xl border border-slate-700 bg-slate-900 text-left transition hover:bg-slate-800"
           >
-            <h3 className="text-lg font-semibold text-white">{season.name}</h3>
+            {season.poster_path && <img src={getImageUrl(season.poster_path)} alt={season.name} className="h-54 w-full object-cover" />}
 
-            <p className="text-sm text-slate-400">{season.episode_count} Episodes</p>
+            <div className="p-4">
+              <h3 className="text-lg font-semibold text-white">{season.name}</h3>
+              <p className="text-sm text-slate-400">{season.episode_count} Episodes</p>
+            </div>
           </button>
         ))}
       </div>
